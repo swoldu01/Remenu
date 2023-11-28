@@ -5,6 +5,8 @@ const photoSchema = new Schema({
   url: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User' },   // Reference to User
   restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' }, // Reference to Restaurant
+  uploadDate: { type: Date, default: Date.now },
+  description: String,
   flagged: { type: Boolean, default: false },
   flagReason: String,
   likesCount: { type: Number, default: 0 }
