@@ -8,8 +8,15 @@ const userSchema = new Schema({
   profilePhoto: String,
   bio: String,
   password: { type: String, required: true },
-  userType: { type: String, required: true, enum: ['reviewer', 'owner'] },
-  timestamp: Timestamp
+  role: {
+    type: String,
+    enum: ['admin', 'owner', 'reviewer'],
+    required: true
+  },
+  restaurantIds: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Restaurant'
+  }]
 });
 
 // Password hashing middleware

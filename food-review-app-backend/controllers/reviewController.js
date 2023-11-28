@@ -1,6 +1,6 @@
 // controllers/reviewController.js
-const Review = require('../models/Review');
-const Dish = require('../models/Dish');
+const Review = require('../models/review');
+const Dish = require('../models/dish');
 
 exports.addReview = (req, res) => {
   const reviewData = {
@@ -25,3 +25,17 @@ exports.addReview = (req, res) => {
       res.status(500).json({ error: err.message });
     });
 };
+
+exports.getReview = async (req, res) => {
+  // Logic to retrieve a specific dish
+};
+
+exports.updateReview = async (req, res) => {
+  // Logic to update a dish
+};
+
+exports.deleteReview = async (req, res) => {
+  // Logic to delete a dish
+};
+
+module.exports = {Review}

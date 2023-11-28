@@ -4,9 +4,15 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const cors = require('cors');
 
+const dishRoutes = require('./routes/dishRoutes');
+const authRoutes = require('./routes/authRoutes');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/dishes', dishRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
@@ -22,7 +28,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch(err => console.log(err));
 
 
-const reviewRoutes = require('../routes/reviewRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 
 app.use('/api', reviewRoutes);
