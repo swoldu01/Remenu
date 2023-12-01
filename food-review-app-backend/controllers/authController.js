@@ -53,7 +53,7 @@ exports.registerUser = async (req, res) => {
     const templateName = 'verificationEmail';
     const templateData = {
         username: user.username,
-        verificationUrl: `https://yourfrontend.com/verify-email?token=${verificationToken}`
+        verificationUrl: `http://localhost:5173/verify-email?token=${verificationToken}`
     };
 
 sendEmail(email, subject, templateName, templateData);
@@ -109,7 +109,7 @@ exports.requestPasswordReset = async (req, res) => {
       const templateName = 'passwordResetEmail';
       const templateData = {
         username: user.username,
-        resetUrl: `https://yourfrontend.com/reset-password?token=${resetToken}`
+        resetUrl: `http://localhost:5173/reset-password?token=${resetToken}`
       };
       
       sendEmail(email, subject, templateName, templateData);
