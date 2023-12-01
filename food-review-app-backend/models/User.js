@@ -16,7 +16,9 @@ const userSchema = new Schema({
   restaurantIds: [{
     type: Schema.Types.ObjectId,
     ref: 'Restaurant'
-  }]
+  }],
+  emailVerificationToken: String,
+  isEmailVerified: { type: Boolean, default: false }
 });
 
 // Password hashing middleware
