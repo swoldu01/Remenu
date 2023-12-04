@@ -1,15 +1,6 @@
-
+import React, { useState } from 'react';
     
-const HoursOfOperation = () => {
-  const [hours, setHours] = useState({
-    monday: { open: '', close: '' },
-    tuesday: { open: '', close: '' },
-    wednesday: { open: '', close: '' },
-    thursday: { open: '', close: '' },
-    friday: { open: '', close: '' },
-    saturday: { open: '', close: '' },
-    sunday: { open: '', close: '' },
-  });
+const HoursOfOperation = ({ setFieldValue, values }) => {
 
   const handleHoursChange = (day, openOrClose, value) => {
     setFieldValue(`hoursOfOperation.${day}.${openOrClose}`, value);
@@ -17,7 +8,7 @@ const HoursOfOperation = () => {
 
   return (
     <div>
-      {Object.entries(hours).map(([day, times]) => (
+      {Object.entries(values).map(([day, times]) => (
         <div key={day} className="row mb-3">
           <div className="col">
             <label>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
@@ -26,7 +17,7 @@ const HoursOfOperation = () => {
             <input
               type="time"
               className="form-control"
-              value={times.open}
+              value={values[day].open}
               onChange={(e) => handleHoursChange(day, 'open', e.target.value)}
               placeholder="Open Time"
             />

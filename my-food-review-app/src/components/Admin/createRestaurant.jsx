@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import HoursOfOperation from './HoursOfOperation';
+import HoursOfOperation from '../hoursofOperation';
+import MultiSelectCheckbox from '../checkbox';
 import { CUISINE_TYPES, DISH_TYPES, DIETARY_RESTRICTIONS, RESTAURANT_CATEGORIES } from '../Utility/constants';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -36,6 +37,17 @@ const CreateRestaurant = () => {
 
   });
 
+  const handleMultiSelectChange = (setFieldValue, fieldName) => (event) => {
+    const options = event.target.options;
+    const value = [];
+    for (let i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    setFieldValue(fieldName, value);
+  };
+
   const onSubmit = async (values) => {
     try {
       const token = Cookies.get('jwt');
@@ -70,17 +82,25 @@ const CreateRestaurant = () => {
 
           <HoursOfOperation values={values.hoursOfOperation} setFieldValue={setFieldValue} />
 
-          <Field as="select" name="cuisineType" multiple>
-            {CUISINE_TYPES.map(type => <option key={type} value={type}>{type}</option>)}
-          </Field>
+          <MultiSelectCheckbox
+              options={CUISINE_TYPES}
+              selectedOptions={values.cuisineType}
+              setSelectedOptions={(value) => setFieldValue('cuisineType', value)}
+              label="Cuisine Type"
+            />
 
-          <Field as="select" name="dishType" multiple>
-            {DISH_TYPES.map(type => <option key={type} value={type}>{type}</option>)}
-          </Field>
-
-          <Field as="select" name="dietaryRestrictions" multiple>
-            {DIETARY_RESTRICTIONS.map(restriction => <option key={restriction} value={restriction}>{restriction}</option>)}
-          </Field>
+            <MultiSelectCheckbox
+              options={DISH_TYPES}
+              selectedOptions={values.dishType}
+              setSelectedOptions={(value) => setFieldValue('dishType', value)}
+              label="Dish Type"
+            />
+            <MultiSelectCheckbox
+              options={DIETARY_RESTRICTIONS}
+              selectedOptions={values.dietaryRestrictions}
+              setSelectedOptions={(value) => setFieldValue('dietaryRestrictions', value)}
+              label="Dietary Restrictions"
+            />
 
           <Field as="select" name="setting">
             {RESTAURANT_CATEGORIES.map(setting => <option key={setting} value={setting}>{setting}</option>)}

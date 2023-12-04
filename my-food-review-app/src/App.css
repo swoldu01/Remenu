@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.custom-multi-select {
+  height: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+}
