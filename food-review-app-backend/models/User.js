@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-  username: { type: String, required: true },
+  username: { type: String,},
   email: { type: String, required: true, unique: true },
   profilePhoto: String,
   bio: String,
@@ -31,7 +31,7 @@ userSchema.pre('save', async function(next) {
 
 // Pre-remove hook for reviewer type user
 userSchema.pre('remove', function(next) {
-  if (this.userType === 'reviewer') {
+  if (this.role === 'reviewer') {
     const userId = this._id;
     Promise.all([
       this.model('Review').deleteMany({ user: userId }),

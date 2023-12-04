@@ -1,15 +1,22 @@
 const User = require('../models/user');
 const sendEmail = require('../middleware/emailService')
 const crypto = require('crypto');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
 exports.userLogin = async (req, res) => {
   try {
+    console.log(req.body)
     const user = await User.findOne({ email: req.body.email });
-    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
-      return res.status(401).send('Authentication failed');
+    if (!user) {
+      console.log('User not found');
+      return res.status(401).send('User not found','Authentication failed');
+    }
+console.log(user)
+    if (!bcrypt.compareSync(req.body.password, user.password)) {
+      console.log('Password mismatch');
+      return res.status(401).send('Password mismatch', 'Authentication failed');
     }
 
     const token = jwt.sign(
@@ -61,7 +68,8 @@ sendEmail(email, subject, templateName, templateData);
   
       res.status(201).json({ message: 'User registered. Verification email sent.', userId: user._id });
     } catch (error) {
-      res.status(500).json({ message: 'Error registering user' });
+      console.error('Registration Error:', error);
+      res.status(500).json({ message: 'Error registering user', error: error.message });
     }
   };
   
@@ -79,7 +87,8 @@ exports.verifyEmail = async (req, res) => {
   
       res.status(200).json({ message: 'Email verified successfully' });
     } catch (error) {
-      // Error handling
+      console.error('Verification Error:', error);
+        res.status(500).send('Internal Server Error');
     }
 };
   

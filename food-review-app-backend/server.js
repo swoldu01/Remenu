@@ -1,37 +1,35 @@
-//Express Server Setup
+const db = require('./db');
+(require('dotenv').config());
 const express = require('express');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();
 const cors = require('cors');
+// const logger = require('morgan');
+const PORT = process.env.PORT || 5000;
 
-const dishRoutes = require('./routes/dishRoutes');
+// const dishRoutes = require('./routes/dishRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
+
+// app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
+// app.use(bodyParser.json());
 
-app.use('/api/dishes', dishRoutes);
-app.use('/api/auth', authRoutes);
+// app.use('/api/dishes', dishRoutes);
+app.use('/auth', authRoutes);
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-//Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
 
 
-const reviewRoutes = require('./routes/reviewRoutes');
+// const reviewRoutes = require('./routes/reviewRoutes');
 
 
-app.use('/api', reviewRoutes);
+// app.use('/api', reviewRoutes);
 
 
   

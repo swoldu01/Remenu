@@ -22,10 +22,10 @@ const Login = () => {
     console.log(data);
     axios.post('http://localhost:5000/auth/login', data)
     .then(response => {
-      console.log(response.data);
+      console.log(response);
      const { token, refreshToken } = response.data;
-     Cookies.set('jwt', token, { expires: 1, secure: true, sameSite: 'Strict' });
-     Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true, sameSite: 'Strict' }); // Expires in 7 days
+     Cookies.set('jwt', token, { expires: 1, sameSite: 'Strict' });
+     Cookies.set('refreshToken', refreshToken, { expires: 7, sameSite: 'Strict' }); // Expires in 7 days
     navigate('/'); // Navigate to home page
     })
     .catch(error => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const isAuthenticated = require('../../middleware/isAuthenticated');
+const isAuthenticated = require('../middleware/isAuthenticated');
 const dishController = require('../controllers/dishController');
 
 router.post('/', isAuthenticated, dishController.createDish); // Create a new dish
