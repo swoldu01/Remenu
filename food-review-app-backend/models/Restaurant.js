@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema({
+    photo: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
     name: { type: String, required: true, index: true },
     description: String,
     location: { type: String, required: true, index: true },
