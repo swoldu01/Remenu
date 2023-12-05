@@ -37,17 +37,6 @@ const CreateRestaurant = () => {
 
   });
 
-  const handleMultiSelectChange = (setFieldValue, fieldName) => (event) => {
-    const options = event.target.options;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setFieldValue(fieldName, value);
-  };
-
   const onSubmit = async (values) => {
     try {
       const token = Cookies.get('jwt');

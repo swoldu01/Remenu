@@ -26,6 +26,7 @@ const Login = () => {
      const { token, refreshToken } = response.data;
      Cookies.set('jwt', token, { expires: 1, sameSite: 'Strict' });
      Cookies.set('refreshToken', refreshToken, { expires: 7, sameSite: 'Strict' }); // Expires in 7 days
+     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     navigate('/'); // Navigate to home page
     })
     .catch(error => {

@@ -1,4 +1,4 @@
-export const CUISINE_TYPES = [
+  export const CUISINE_TYPES = [
     "American", "Italian", "Chinese", "Japanese", "Indian", "Mexican", "French", "Thai",
     "Spanish", "Greek", "Turkish", "Vietnamese", "Korean", "Mediterranean", "Middle Eastern",
     "German", "Caribbean", "Russian", "Ethiopian", "Moroccan", "Brazilian", "Portuguese",
@@ -25,3 +25,9 @@ export const CUISINE_TYPES = [
     "Casual Dining", "Buffet", "Food Truck or Street Food",
   ];
   
+  export const MAIN_INGREDIENTS = [
+    'Chicken', 'Beef', 'Pork', 'Lamb', 'Fish', 'Shrimp', 'Crab', 'Lobster', 'Tofu', 'Tempeh', 'Beans', 'Lentils', 'Cheese', 
+    'Eggs', 'Mushrooms', 'Potatoes', 'Rice', 'Pasta', 'Bread', 'Tomatoes', 'Spinach', 'Broccoli', 'Corn', 'Peppers', 'Onions',
+    'Garlic', 'Carrots', 'Cabbage', 'Zucchini', 'Squash', 'Eggplant', 'Apples', 'Bananas', 'Berries', 'Chocolate',
+    'Nuts', 'Seitan', 'Quinoa', 'Barley', 'Oats'
+  ];

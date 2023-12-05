@@ -19,7 +19,7 @@ function App() {
           const refreshToken = Cookies.get('refreshToken');
           const response = await axios.post('http://localhost:5000/auth/refresh-token', { refreshToken });
           const newToken = response.data.accessToken;
-          Cookies.set('jwt', newToken, { expires: 1, secure: true, sameSite: 'Strict' }); //might need to erase secure: true for testing purposes.
+          Cookies.set('jwt', newToken, { expires: 1, sameSite: 'Strict' }); //might need to erase secure: true for testing purposes.
           axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
           return axios(originalRequest);
         } catch (refreshError) {

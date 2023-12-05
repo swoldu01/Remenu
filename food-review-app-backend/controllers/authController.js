@@ -14,7 +14,7 @@ exports.userLogin = async (req, res) => {
       return res.status(401).send('User not found','Authentication failed');
     }
 console.log(user)
-    if (!bcrypt.compareSync(req.body.password, user.password)) {
+    if (!bcrypt.compare(req.body.password, user.password)) {
       console.log('Password mismatch');
       return res.status(401).send('Password mismatch', 'Authentication failed');
     }
@@ -38,6 +38,22 @@ console.log(user)
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
+exports.logout = async (req, res) => {
+  try {
+      const userId = req.userData._id; // Assuming you have userId in userData
+      // Invalidate the refresh token for the user
+      // This might involve setting a flag in your database
+      // For example: await User.findByIdAndUpdate(userId, { refreshToken: null });
+      
+      res.status(200).json({ message: 'Logout successful' });
+  } catch (error) {
+      console.error('Logout Error:', error);
+      res.status(500).json({ message: 'Error during logout' });
+  }
+};
+
 
 //Creates a user and send a verifiying email
 exports.registerUser = async (req, res) => {
@@ -94,12 +110,13 @@ exports.verifyEmail = async (req, res) => {
   
 
 exports.refreshToken = (req, res) => {
-    const refreshToken = req.body.token;
+    const refreshToken = req.body.refreshToken;
     // Verify the refresh token with your database
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
     const accessToken = jwt.sign({ userId: decoded.userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.status(200).json({ accessToken });
 };
+
 //sends token and uses email provider to send email template
 exports.requestPasswordReset = async (req, res) => {
     try {
