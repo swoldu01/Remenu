@@ -1,5 +1,5 @@
 import React from "react";
-import CreateRestaurant from "./Admin/createRestaurant";
+import CreateDish from "./Admin/createDish";
 import Logout from "./Logout";
 
 function Home() {
@@ -7,7 +7,7 @@ function Home() {
     <div>
       <h1>Welcome to the Food Review App</h1>
       <Logout/>
-      <CreateRestaurant/>
+     <CreateDish/>
     </div>
   );
 }

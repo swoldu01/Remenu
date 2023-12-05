@@ -2,6 +2,9 @@ const Restaurant = require('../models/restaurant');
 const Dish = require('../models/dish');
 
 const checkOwner = async (req, res, next) => {
+  if (req.userData.role === 'admin') {
+    return next();
+  }
   const userId = req.userData._id; // Set by isAuthenticated middleware
   const restaurantId = req.params.restaurantId || req.body.restaurant;
   const dishId = req.params.dishId;
@@ -13,7 +16,7 @@ const checkOwner = async (req, res, next) => {
       if (!restaurant) {
         return res.status(404).json({ message: 'Restaurant not found' });
       }
-      if (!restaurant.owner.equals(userId) && req.userData.role !== 'admin') {
+      if (!restaurant.owner.equals(userId)) {
         return res.status(403).json({ message: 'Access denied. Not the owner of the restaurant.' });
       }
     } else if (dishId) {

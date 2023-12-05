@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const restaurantSchema = new Schema({
     name: { type: String, required: true, index: true },
     description: String,
-    location: { type: String, index: true },
+    location: { type: String, required: true, index: true },
     contactinfo: String,
     hoursOfOperation: {
         monday: { open: String, close: String },

@@ -1,13 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import Cookies from 'js-cookie';
-import MultiSelectCheckbox from '../checkbox';
+import MultiSelectCheckbox from '../Utility/checkbox';
 import { CUISINE_TYPES, DISH_TYPES, DIETARY_RESTRICTIONS, MAIN_INGREDIENTS } from '../Utility/constants';
 
-const CreateDish = ({ restaurantId }) => {
+const CreateDish = () => {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      const token = Cookies.get('jwt');
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+
+      const url = userRole === 'admin' 
+        ? 'http://localhost:5000/admin/restaurants' 
+        : 'http://localhost:5000/owner/restaurants';
+
+      try {
+        const response = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setRestaurants(response.data);
+      } catch (error) {
+        console.error('Error fetching restaurants:', error);
+      }
+    };
+
+    fetchRestaurants();
+  }, []);
+
   const initialValues = {
+    restaurant: '', // Added field for selected restaurant
     name: '',
     price: '',
     mainIngredients: [],
@@ -34,6 +61,7 @@ const CreateDish = ({ restaurantId }) => {
   const onSubmit = async (values) => {
     try {
       const token = Cookies.get('jwt');
+      const restaurantId = values.restaurant;
       const response = await axios.post(`http://localhost:5000/admin/restaurants/${restaurantId}/dishes`, values, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -50,7 +78,18 @@ const CreateDish = ({ restaurantId }) => {
       <h2>Create Dish</h2>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         {({ values, setFieldValue }) => (
+
           <Form>
+            <Field as="select" name="restaurant">
+              <option value="">Select Restaurant</option>
+              {restaurants.map((restaurant) => (
+                <option key={restaurant._id} value={restaurant._id}>
+                  {restaurant.name} - {restaurant.location}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage name="restaurant" component="div" />
+
             <Field name="name" type="text" placeholder="Name" />
             <ErrorMessage name="name" component="div" />
 

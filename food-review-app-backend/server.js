@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5000;
 const adminRoutes = require('./routes/adminRoutes');
 // const dishRoutes = require('./routes/dishRoutes');
 const authRoutes = require('./routes/authRoutes');
+const ownerRoutes  = require('./routes/ownerRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 // app.use('/dishes', dishRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
+app.use('/owner', ownerRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -19,7 +19,7 @@ router.delete('/restaurants/:restaurantId', isAuthenticated, checkRole('admin'),
 
 // Dish Management
 router.get('/dishes', isAuthenticated, checkRole('admin'), AdminController.listAllDishes);
-router.post('/restaurants/:restaurantId/dishes', isAuthenticated, checkRole('admin'), checkOwner, AdminController.addDish);
+router.post('/restaurants/:restaurantId/dishes', isAuthenticated, checkRole('admin', 'owner'), checkOwner, AdminController.addDish);
 router.put('/dishes/:dishId', isAuthenticated, checkRole('admin'), checkOwner, AdminController.updateDish);
 router.delete('/dishes/:dishId', isAuthenticated, checkRole('admin'), AdminController.deleteDish);
 

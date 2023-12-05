@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import HoursOfOperation from '../hoursofOperation';
-import MultiSelectCheckbox from '../checkbox';
+import MultiSelectCheckbox from '../Utility/checkbox';
 import { CUISINE_TYPES, DISH_TYPES, DIETARY_RESTRICTIONS, RESTAURANT_CATEGORIES } from '../Utility/constants';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
