@@ -8,6 +8,7 @@ function Navbar() {
       <Link to="/register">Register</Link>
       <Link to="/restaurants">Restaurants</Link>
       <Link to="/profile">Profile</Link>
+      <Link to="/create">Create</Link>
     </nav>
   );
 }
