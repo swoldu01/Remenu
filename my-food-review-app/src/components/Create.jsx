@@ -9,6 +9,7 @@ function Create() {
       <Logout/>
       <Link to="/createdish">Create Dish</Link>
       <Link to="/createrestaurant" >Create Restaurant</Link>
+      <Link to="/adminuserupdate" >Update User</Link>
     </div>
   );
 }

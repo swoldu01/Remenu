@@ -6,6 +6,7 @@ import Register from "./Register";
 import Create from "./Create";
 import CreateDish from "./Admin/createDish";
 import CreateRestaurant from "./Admin/createRestaurant";
+import AdminUserUpdate from "./Admin/adminUserUpdate";
 import EmailVerification from "./EmailVerification";
 // import RestaurantList from "./RestaurantList";
 // import RestaurantDetail from "./RestaurantDetail";
@@ -22,6 +23,7 @@ function AppRoutes() {
         <Route exact path="/create" element={<Create />} />
         <Route exact path="/createdish" element={<CreateDish/>} />
         <Route exact path="/createrestaurant" element={<CreateRestaurant/>} />
+        <Route exact path="/adminuserupdate" element= {<AdminUserUpdate/>} />
         {/* <Route exact path="/restaurants" element={<RestaurantList />} />
         <Route exact path="/restaurants/:id" element={<RestaurantDetail />} />
         <Route exact path="/dishes/:id" element={<DishDetail />} />

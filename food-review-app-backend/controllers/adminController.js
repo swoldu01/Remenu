@@ -6,6 +6,56 @@ const Review = require('../models/review');
 
 //USER MANAGEMENT
 
+    exports.searchUsersByEmail = async (req, res) => {
+        const { email } = req.query;
+        console.log(req.query)
+
+        try {
+            const users = await User.find({ email: new RegExp(email, 'i') }).select('-password');
+            res.status(200).json(users);
+        } catch (error) {
+            res.status(500).json({ message: 'Error searching users', error: error.message });
+        }
+    };
+
+    exports.getUserDetails = async (req, res) => {
+        const { userId } = req.params;
+    
+        try {
+            const user = await User.findById(userId)
+                                   .populate('restaurantIds') // Populating restaurant details if any exist
+                                   .select('-password'); // Excluding the password for security
+    
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+    
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching user details', error: error.message });
+        }
+    };
+    
+
+    exports.updateUser = async (req, res) => {
+        const { userId } = req.params;
+        const updateData = req.body; // Contains the fields to be updated
+    
+        try {
+            const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true });
+    
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+    
+            res.status(200).json({ message: 'User updated successfully', data: updatedUser });
+        } catch (error) {
+            res.status(500).json({ message: 'Error updating user', error: error.message });
+        }
+    };
+    
+
+
     exports.listAllUsers = async (req, res) => {
         try {
             const users = await User.find({}).select('-password');
@@ -29,6 +79,37 @@ const Review = require('../models/review');
     };
     
 
+    exports.addRestaurantToUser = async (req, res) => {
+        const { userId } = req.params;
+        const { restaurantId } = req.body;
+    
+        try {
+            // Find the user by userId
+            const user = await User.findById(userId);
+    
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+    
+            // Optionally, check if the restaurant exists
+            const restaurantExists = await Restaurant.findById(restaurantId);
+            if (!restaurantExists) {
+                return res.status(404).json({ message: 'Restaurant not found' });
+            }
+    
+            // Add the restaurantId to the user's restaurantIds array
+            if (!user.restaurantIds.includes(restaurantId)) {
+                user.restaurantIds.push(restaurantId);
+                await user.save();
+            }
+    
+            res.status(200).json({ message: 'Restaurant added to user successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error adding restaurant to user', error: error.message });
+        }
+    };
+    
+
     exports.deleteUser = async (req, res) => {
         const { userId } = req.params;
         try {
@@ -44,6 +125,18 @@ const Review = require('../models/review');
     };
   
 //RESATAURANT MANAGEMENT
+
+    exports.searchRestaurantByName = async (req, res) => {
+        const { name } = req.query;
+        console.log(req.query)
+
+        try {
+            const users = await Restaurant.find({ name: new RegExp(name, 'i') });
+            res.status(200).json(users);
+        } catch (error) {
+            res.status(500).json({ message: 'Error searching users', error: error.message });
+        }
+    };
 
     exports.listAllRestaurants = async (req, res) => {
         try {

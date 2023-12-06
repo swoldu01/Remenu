@@ -1,4 +1,4 @@
-// adminRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const AdminController = require('../controllers/adminController');
@@ -8,7 +8,11 @@ const checkOwner = require('../middleware/checkOwner');
 
 // User Management
 router.get('/users', isAuthenticated, checkRole('admin'), AdminController.listAllUsers);
+router.get('/users/search', isAuthenticated, checkRole('admin'), AdminController.searchUsersByEmail);
+router.get('/users/:userId', isAuthenticated, checkRole('admin'), AdminController.getUserDetails);
+router.put('/users/:userId', isAuthenticated, checkRole('admin'), AdminController.updateUser);
 router.put('/users/:userId/role', isAuthenticated, checkRole('admin'), AdminController.updateUserRole);
+router.post('/users/:userId/addRestaurant', isAuthenticated, checkRole('admin'), AdminController.addRestaurantToUser);
 router.delete('/users/:userId', isAuthenticated, checkRole('admin'), AdminController.deleteUser);
 
 // Restaurant Management
