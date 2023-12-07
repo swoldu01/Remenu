@@ -1,4 +1,4 @@
-# ReMenu - Restaurant Review Web Application
+# ReMenu - Dish Review Web Application
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)
 [![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-blue)](#)
