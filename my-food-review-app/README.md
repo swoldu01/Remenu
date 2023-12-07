@@ -1,8 +1,40 @@
-# React + Vite
+# ReMenu - Restaurant Review Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)
+[![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-blue)](#)
+[![MERN Stack](https://img.shields.io/badge/stack-MERN-red)](#)
+[![License](https://img.shields.io/badge/license-MIT-green)](#)
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ReMenu is a full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) and Vite. It allows users to search for, review, and interact with restaurant and dish data. The app supports custom JWT authentication, nodemailer for email verification, and distinct roles (Admin, Owner, Reviewer) with specific permissions.
+
+## Features
+
+- **Dynamic Search**: Users can dynamically search for restaurants and dishes.
+- **User Authentication**: Custom JWT-based authentication system.
+- **Email Verification**: Utilizes nodemailer for user email verification.
+- **Responsive Design**: Mobile-friendly interface using Bootstrap and Formik for form handling.
+- **Admin Controller**: Planned feature for an admin dashboard to manage all application data.
+
+## Technology Stack
+
+- **Frontend**: React with Vite, Bootstrap for styling.
+- **Backend**: Node.js, Express.js.
+- **Database**: MongoDB.
+- **Authentication**: Custom JWT authentication.
+- **Email Service**: Nodemailer for email verification.
+
+## Installation and Setup
+
+```bash
+# Clone the repository
+git clone [https://github.com/swoldu01/Remenu.git]
+cd [Remenu]
+
+# Install dependencies
+npm install
+
+# Run the application
+npm start
+
