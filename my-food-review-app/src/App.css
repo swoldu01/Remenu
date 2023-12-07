@@ -48,32 +48,35 @@
 }
 
 :root {
-  --bs-primary: #007bff; /* Your primary color */
-  --bs-secondary: #6c757d; /* Your secondary color */
-  --bs-font-sans-serif: 'Open Sans', sans-serif; /* Primary font */
-  --bs-font-monospace: 'Roboto Mono', monospace; /* Secondary font */
+  --primary-color: #A2272E;
+  --secondary-color: #F4F1DE; 
+  --accent-color: #FFC107; 
+  --background-color: #FFF8E1; 
+  --text-color: #333; 
 }
 
-/* Custom styles */
-.navbar, .btn, .link {
-  font-family: var(--bs-font-sans-serif);
+body {
+  background-color: var(--background-color);
+  background-image: linear-gradient(45deg, #FFF8E1 25%, transparent 25%, transparent 75%, #FFF8E1 75%, #FFF8E1),
+                    linear-gradient(45deg, #FFF8E1 25%, var(--secondary-color) 25%, var(--secondary-color) 75%, #FFF8E1 75%, #FFF8E1);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  color: var(--text-color);
+  font-family: 'Open Sans', sans-serif;
 }
 
-body, .card, .modal-content {
-  background-color: #f8f9fa; /* Light background */
+.navbar {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--bs-font-sans-serif);
-  color: var(--bs-primary);
+
+.card {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
 }
 
-.btn-primary {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
-}
-
-.btn-primary:hover {
-  background-color: var(--bs-primary-hover);
-  border-color: var(--bs-primary-hover);
+.card-header {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
