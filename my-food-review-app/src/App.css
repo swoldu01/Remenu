@@ -46,3 +46,34 @@
   overflow-x: auto;
   white-space: nowrap;
 }
+
+:root {
+  --bs-primary: #007bff; /* Your primary color */
+  --bs-secondary: #6c757d; /* Your secondary color */
+  --bs-font-sans-serif: 'Open Sans', sans-serif; /* Primary font */
+  --bs-font-monospace: 'Roboto Mono', monospace; /* Secondary font */
+}
+
+/* Custom styles */
+.navbar, .btn, .link {
+  font-family: var(--bs-font-sans-serif);
+}
+
+body, .card, .modal-content {
+  background-color: #f8f9fa; /* Light background */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--bs-font-sans-serif);
+  color: var(--bs-primary);
+}
+
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--bs-primary-hover);
+  border-color: var(--bs-primary-hover);
+}

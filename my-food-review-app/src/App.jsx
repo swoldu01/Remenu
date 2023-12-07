@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import AppRoutes from './components/appRoutes';
 import Nav from './components/Nav'
