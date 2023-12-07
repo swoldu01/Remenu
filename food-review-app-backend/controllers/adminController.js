@@ -113,16 +113,29 @@ const Review = require('../models/review');
     exports.deleteUser = async (req, res) => {
         const { userId } = req.params;
         try {
-        const userToDelete = await User.findById(userId);
-        if (!userToDelete) {
-            return res.status(404).json({ message: 'User not found' });
+            // Find the user by ID
+            const userToDelete = await User.findById(userId);
+            if (!userToDelete) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+          // Pre-deletion logic for 'reviewer' role
+          if (userToDelete.role === 'reviewer') {
+            await Promise.all([
+                Review.deleteMany({ user: userId }),
+                Like.deleteMany({ user: userId }),
+                Photo.deleteMany({ user: userId })
+            ]);
         }
-        await userToDelete.remove();
-        res.status(200).json({ message: 'User deleted successfully' });
+            await User.findByIdAndDelete(userId);
+    
+            res.status(200).json({ message: 'User deleted successfully' });
         } catch (error) {
-        res.status(500).json({ message: 'Error deleting user', error: error.message });
+            console.error(error);
+            res.status(500).json({ message: 'Error deleting user', error: error.message });
         }
     };
+    
   
 //RESATAURANT MANAGEMENT
 
